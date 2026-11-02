@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# QR Code Scanner
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A small web app that scans QR codes with your device's camera, right in the browser. Built with [React](https://react.dev/) and [html5-qrcode](https://github.com/mebjas/html5-qrcode).
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Starts the rear camera automatically and stops it after a successful scan.
+- Shows web addresses (`http` and `https`) as clickable links that open in a new tab.
+- Shows any other result, including `javascript:` URLs, as plain text so it can't be clicked by accident.
+- **Copy** button for the scanned text and a **Scan again** button for the next code.
+- Clear messages when the camera is blocked, missing or already in use.
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Node.js](https://nodejs.org/) and npm
+- A device with a camera
 
-### `npm test`
+### Install and run
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/zuni-developer/QR-Code-Scanner.git
+cd QR-Code-Scanner
+npm install
+npm start
+```
 
-### `npm run build`
+Then open <http://localhost:3000> and allow camera access when the browser asks.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> **Camera access needs a secure context.** Browsers only allow it on `https://` pages or on `localhost`. If you deploy the app, serve it over HTTPS.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Scripts
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+| Command         | What it does                                       |
+| --------------- | -------------------------------------------------- |
+| `npm start`     | Runs the app in development mode on port 3000      |
+| `npm test`      | Runs the tests in watch mode                       |
+| `npm run build` | Creates an optimised production build in `build/`  |
 
-### `npm run eject`
+## How it works
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`QRScanner.js` creates one `Html5Qrcode` instance and runs all start and stop calls through a queue so they never overlap. That keeps the camera from being left on, including under React's StrictMode double mount in development. The tests mock `html5-qrcode`, so they run without a camera.
