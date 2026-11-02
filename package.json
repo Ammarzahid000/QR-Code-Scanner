@@ -1,6 +1,7 @@
 {
-  "name": "scanner",
+  "name": "qr-code-scanner",
   "version": "0.1.0",
+  "description": "A browser-based QR code scanner built with React and html5-qrcode",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

@@ -1,5 +1,35 @@
-#qr-reader {
-  margin: auto;
-  display: block;
+.App {
+  padding: 1rem;
+  text-align: center;
+}
+
+.scanner__reader {
+  width: 300px;
+  max-width: 100%;
+  margin: 1rem auto;
   border: 2px solid #000;
+}
+
+.scanner__error {
+  color: #b00020;
+}
+
+.scanner__result {
+  margin: 1rem auto;
+  max-width: 600px;
+}
+
+.scanner__text,
+.scanner__result a {
+  overflow-wrap: anywhere;
+}
+
+.scanner__actions {
+  margin: 0.75rem 0;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
 }
